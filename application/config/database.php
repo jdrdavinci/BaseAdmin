@@ -84,10 +84,10 @@ function dd($input, $die = false){
 
 
 $db['develop'] = array(
-    'dsn'  => 'mysql:host=localhost; dbname=*******; charset=utf8;',
+    'dsn'  => 'mysql:host=localhost; dbname=customer_stats; charset=utf8;',
     'hostname' => 'localhost',
-    'username' => '******',
-    'password' => '******',
+    'username' => 'root',
+    'password' => '',
     'database' => '',
     'dbdriver' => 'pdo',
     'dbprefix' => '',

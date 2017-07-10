@@ -323,10 +323,10 @@ $config['cache_query_string'] = FALSE;
 |
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
-| You can generate one via url: /Key_creator. An 128 bit key is recommended
+| You can generate one via url: /Key_creator. An AES 256 bit key is recommended
 |
 */
-$config['encryption_key'] = "";
+$config['encryption_key'] = hex2bin('2c305e7f74c4d6ae5cc3b79720c123b312215959104222cea60c7302a6ed1d5a');
 
 /*
 |--------------------------------------------------------------------------

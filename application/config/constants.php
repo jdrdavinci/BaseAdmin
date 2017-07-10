@@ -87,9 +87,9 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 /* APP VARIABLES */
 
-defined('APP_NAME') or define("APP_NAME", "Change appname in config/constants.php");
-defined('APP_SUFFIX') or define('APP_SUFFIX', "Development");
-defined('APP_SHORT') or define('APP_SHORT', "E");
+defined('APP_NAME') or define("APP_NAME", "MXFNT");
+defined('APP_SUFFIX') or define('APP_SUFFIX', "STATS");
+defined('APP_SHORT') or define('APP_SHORT', "M");
 defined('APP_POWERED_BY') or define('APP_POWERED_BY', "Mixfinity");
 defined('APP_POWERED_BY_SITE') or define('APP_POWERED_BY_SITE', "https://www.mixfinity.nl");
 
