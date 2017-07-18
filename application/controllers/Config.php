@@ -14,31 +14,18 @@ class Config extends CI_Controller {
 	}
 
 	public function users(){
-		$this->load->model("MenuModel", "menu");
 		$this->load->model("ConfigModel", "config_model");
-
-		$temp_menu = $this->menu->getMenu();
-		$menudata = array(
-			"menu" => $temp_menu
-		);
-
 		/* Users overview */
 		$users = $this->config_model->getUsers();
 		$users_data = array(
 			"users" => $users,
 			"deleted" => !empty($this->input->get('deleted')) ? 1 : 0
 		);
-
-		$this->load->view('common/header');
-		$this->load->view('common/menu', $menudata);
-		$this->load->view('config/users_overview', $users_data);
-		$this->load->view('common/footer');
+		render('config/users_overview', $users_data);
 	}
 
 	public function editUser($f_id = 0){
-		$this->load->model("MenuModel", "menu");
 		$this->load->model("ConfigModel", "config_model");
-
 		if ($this->input->server('REQUEST_METHOD') == 'POST'){
 			$saveData = array(
 				"name" => $this->input->post('name'),
@@ -51,11 +38,6 @@ class Config extends CI_Controller {
 			$newId = $f_id > 0 ?  $this->config_model->updateUser($saveData, $this->input->post('id')) : $this->config_model->insertUser($saveData);
 			header('Location: /config/editUser/' . $newId);
 		}
-
-		$temp_menu = $this->menu->getMenu();
-		$menudata = array(
-			"menu" => $temp_menu
-		);
 
 		/* User Edit */
 		$line = $this->config_model->getUser($f_id);
@@ -75,38 +57,20 @@ class Config extends CI_Controller {
 			"type" => $pageType,
 			"profiles" => $profiles
 		);
-
-		$this->load->view('common/header');
-		$this->load->view('common/menu', $menudata);
-		$this->load->view('config/user_edit', $user_data);
-		$this->load->view('common/footer');
+		render('config/user_edit', $user_data);
 	}
 
 	public function rights(){
-		$this->load->model("MenuModel", "menu");
 		$this->load->model("ConfigModel", "config_model");
-
-		$temp_menu = $this->menu->getMenu();
-		$menudata = array(
-			"menu" => $temp_menu
-		);
-
 		$profiles = $this->config_model->getProfiles();
 		$rights_data = array(
 			'profiles' => $profiles
 		);
-
-
-		$this->load->view('common/header');
-		$this->load->view('common/menu', $menudata);
-		$this->load->view('config/rights_overview', $rights_data);
-		$this->load->view('common/footer');
+		render('config/rights_overview', $rights_data);
 	}
 
 	public function editRights($f_id = 0){
-		$this->load->model("MenuModel", "menu");
 		$this->load->model("ConfigModel", "config_model");
-
 		$saved = 0;
 		if ($this->input->server('REQUEST_METHOD') == 'POST'){
 			$this->config_model->clearRights($f_id);
@@ -130,23 +94,12 @@ class Config extends CI_Controller {
 			
 			$saved = 1;
 		}
-
-		$temp_menu = $this->menu->getMenu();
-		$menudata = array(
-			"menu" => $temp_menu
-		);
-
 		$rights_data = array(
 			"profile_id" => $f_id,
 			"rights" => $this->config_model->getRights($f_id),
 			"saved" => $saved
 		);
-
-
-		$this->load->view('common/header');
-		$this->load->view('common/menu', $menudata);
-		$this->load->view('config/rights_edit', $rights_data);
-		$this->load->view('common/footer');
+		render('config/rights_edit', $rights_data);
 	}
 
 	public function saveProfile(){

@@ -26,7 +26,7 @@
         <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="hold-transition skin-black sidebar-mini <?php if($this->session->userdata('menu_state')) { ?> sidebar-collapse <?php } ?>">
+  <body class="hold-transition skin-blue-light sidebar-mini <?php if($this->session->userdata('menu_state')) { ?> sidebar-collapse <?php } ?>">
     <div class="wrapper">
 
       <header class="main-header">
