@@ -73,14 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'develop';
 $query_builder = TRUE;
 
-function dd($input, $die = false){
-    echo "<pre>";
-    print_r($input);
-    echo "</pre>";
-    if($die){
-        die();
-    }
-}
+
 
 
 $db['develop'] = array(
