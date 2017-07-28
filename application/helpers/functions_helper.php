@@ -28,6 +28,18 @@
 	  }
 	}
 
+	if(!function_exists('dd'))
+	{
+		function dd($input, $die = false){
+		    echo "<pre>";
+		    print_r($input);
+		    echo "</pre>";
+		    if($die){
+			die();
+		    }
+		}	
+	}
+
 	if(!function_exists('render')){
 		function render($view = false, $data = false){
 			if(!$view){
