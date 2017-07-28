@@ -99,25 +99,14 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 		}
 
 		$db_driver = $this->_db->dbdriver.(empty($this->_db->subdriver) ? '' : '_'.$this->_db->subdriver);
-		if (strpos($db_driver, 'pdo') !== FALSE)
+		if (strpos($db_driver, 'mysql') !== FALSE)
 		{
-			$this->_platform = 'pdo';
+			$this->_platform = 'mysql';
 		}
 		elseif (in_array($db_driver, array('postgre', 'pdo_pgsql'), TRUE))
 		{
 			$this->_platform = 'postgre';
 		}
-
-		if(!$this->_db->table_exists(config_item('sess_table_name'))) {
-			$this->_db->query("CREATE TABLE IF NOT EXISTS `ci_sessions` (
-		        `id` varchar(128) NOT NULL,
-		        `ip_address` varchar(45) NOT NULL,
-		        `timestamp` int(10) unsigned DEFAULT 0 NOT NULL,
-		        `data` blob NOT NULL,
-		        KEY `ci_sessions_timestamp` (`timestamp`)
-		);
-		");
-				}
 
 		// Note: BC work-around for the old 'sess_table_name' setting, should be removed in the future.
 		if ( ! isset($this->_config['save_path']) && ($this->_config['save_path'] = config_item('sess_table_name')))
@@ -363,7 +352,7 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 	 */
 	protected function _get_lock($session_id)
 	{
-		if ($this->_platform === 'pdo')
+		if ($this->_platform === 'mysql')
 		{
 			$arg = md5($session_id.($this->_config['match_ip'] ? '_'.$_SERVER['REMOTE_ADDR'] : ''));
 			if ($this->_db->query("SELECT GET_LOCK('".$arg."', 300) AS ci_session_lock")->row()->ci_session_lock)
@@ -405,7 +394,7 @@ class CI_Session_database_driver extends CI_Session_driver implements SessionHan
 			return TRUE;
 		}
 
-		if ($this->_platform === 'pdo')
+		if ($this->_platform === 'mysql')
 		{
 			if ($this->_db->query("SELECT RELEASE_LOCK('".$this->_lock."') AS ci_session_lock")->row()->ci_session_lock)
 			{

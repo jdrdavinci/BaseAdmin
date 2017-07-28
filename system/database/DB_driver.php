@@ -607,7 +607,6 @@ abstract class CI_DB_driver {
 	 */
 	public function query($sql, $binds = FALSE, $return_object = NULL)
 	{
-
 		if ($sql === '')
 		{
 			log_message('error', 'Invalid query: '.$sql);
@@ -617,8 +616,6 @@ abstract class CI_DB_driver {
 		{
 			$return_object = ! $this->is_write_type($sql);
 		}
-
-
 
 		// Verify table prefix and replace if necessary
 		if ($this->dbprefix !== '' && $this->swap_pre !== '' && $this->dbprefix !== $this->swap_pre)
@@ -632,7 +629,6 @@ abstract class CI_DB_driver {
 			$sql = $this->compile_binds($sql, $binds);
 		}
 
-
 		// Is query caching enabled? If the query is a "read type"
 		// we will load the caching class and return the previously
 		// cached query if it exists
@@ -645,8 +641,6 @@ abstract class CI_DB_driver {
 			}
 		}
 
-
-
 		// Save the query for debugging
 		if ($this->save_queries === TRUE)
 		{
@@ -655,8 +649,6 @@ abstract class CI_DB_driver {
 
 		// Start the Query Timer
 		$time_start = microtime(TRUE);
-
-
 
 		// Run the Query
 		if (FALSE === ($this->result_id = $this->simple_query($sql)))
@@ -677,8 +669,6 @@ abstract class CI_DB_driver {
 
 			// Log errors
 			log_message('error', 'Query error: '.$error['message'].' - Invalid query: '.$sql);
-
-			
 
 			if ($this->db_debug)
 			{
